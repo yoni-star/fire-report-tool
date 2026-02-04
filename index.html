@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מחולל דו"ח משטר הפעלות</title>
+    <!-- פונטים -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS Reset & Layout */
+        /* Base Styles */
         #frg_app_container {
             font-family: 'Noto Sans Hebrew', 'Arial', sans-serif !important;
             line-height: 1.6;
@@ -26,21 +27,11 @@
         }
 
         #frg_app_container * { box-sizing: border-box; }
+        #frg_app_container h1, #frg_app_container h2 { text-align: center; color: #333; margin-top: 0; }
+        #frg_app_container .frg_section { margin-bottom: 30px; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
         
-        #frg_app_container h1, #frg_app_container h2 { 
-            text-align: center; color: #333; margin-top: 0; 
-        }
-
-        #frg_app_container .frg_section { 
-            margin-bottom: 30px; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee; 
-        }
-        
-        #frg_app_container .frg_grid_list { 
-            display: grid; grid-template-columns: 1fr; gap: 10px; 
-        }
-        @media (min-width: 768px) { 
-            #frg_app_container .frg_grid_list { grid-template-columns: repeat(2, 1fr); } 
-        }
+        #frg_app_container .frg_grid_list { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        @media (min-width: 768px) { #frg_app_container .frg_grid_list { grid-template-columns: repeat(2, 1fr); } }
 
         #frg_app_container .frg_item {
             border: 1px solid #ddd; padding: 10px; border-radius: 4px;
@@ -48,13 +39,8 @@
         }
         #frg_app_container .frg_item:hover { background-color: #f0f0f0; }
         
-        #frg_app_container input[type="checkbox"] { 
-            margin-left: 10px; width: 20px; height: 20px; cursor: pointer; 
-        }
-        
-        #frg_app_container label { 
-            cursor: pointer; width: 100%; font-size: 1rem; display: block; padding: 5px; 
-        }
+        #frg_app_container input[type="checkbox"] { margin-left: 10px; width: 20px; height: 20px; cursor: pointer; }
+        #frg_app_container label { cursor: pointer; width: 100%; font-size: 1rem; display: block; padding: 5px; }
 
         #frg_app_container .frg_project_input { margin-bottom: 20px; }
         #frg_app_container input[type="text"] {
@@ -62,9 +48,7 @@
             border-radius: 4px; font-family: inherit; font-size: 1rem;
         }
         
-        #frg_app_container .frg_error_msg { 
-            color: red; font-size: 0.9rem; display: none; margin-top: 5px; 
-        }
+        #frg_app_container .frg_error_msg { color: red; font-size: 0.9rem; display: none; margin-top: 5px; }
 
         #frg_app_container button {
             padding: 10px 20px; background: #5cb85c; color: white;
@@ -72,7 +56,6 @@
             font-size: 1rem; margin: 5px; font-family: inherit; transition: background 0.3s;
         }
         #frg_app_container button:hover { background: #4cae4c; }
-        
         #frg_app_container .btn-blue { background-color: #0275d8; }
         #frg_app_container .btn-blue:hover { background-color: #025aa5; }
         #frg_app_container .btn-red { background-color: #d9534f; }
@@ -86,43 +69,25 @@
         #frg_app_container .scen-item { display: none; }
         #frg_app_container .frg_hidden { display: none !important; }
 
-        /* Report Views */
+        /* Reports */
         #frg_app_container .report-view { display: none; }
         #frg_app_container .report-view.active { display: block; }
         
-        #frg_app_container table { 
-            width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: auto; 
-        }
-        #frg_app_container th, #frg_app_container td { 
-            border: 1px solid #ddd; padding: 8px; text-align: right; 
-        }
+        #frg_app_container table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: auto; }
+        #frg_app_container th, #frg_app_container td { border: 1px solid #ddd; padding: 8px; text-align: right; }
         #frg_app_container th { background-color: #f2f2f2; }
 
-        /* Matrix Styles */
-        #frg_app_container .matrix-cell { 
-            text-align: center; font-size: 2rem !important; font-weight: bold; 
-            line-height: 1; height: 50px; vertical-align: middle; 
-        }
+        #frg_app_container .matrix-cell { text-align: center; font-size: 2rem !important; font-weight: bold; line-height: 1; height: 50px; vertical-align: middle; }
         #frg_app_container .cell-plus { color: red; }
         #frg_app_container .cell-minus { color: blue; }
-        #frg_app_container .matrix-note { 
-            font-size: 0.75rem; display: block; color: #333; font-weight: normal; 
-            margin-top: 5px; line-height: 1.2; 
-        }
-        #frg_app_container th.action-header { 
-            writing-mode: vertical-rl; height: 140px; white-space: nowrap; font-size: 0.85rem; 
-        }
+        #frg_app_container .matrix-note { font-size: 0.75rem; display: block; color: #333; font-weight: normal; margin-top: 5px; line-height: 1.2; }
+        #frg_app_container th.action-header { writing-mode: vertical-rl; height: 140px; white-space: nowrap; font-size: 0.85rem; }
         
-        #frg_app_container .legend { 
-            padding: 10px; background: #f9f9f9; border: 1px solid #eee; 
-            margin-bottom: 10px; text-align: center; 
-        }
+        #frg_app_container .legend { padding: 10px; background: #f9f9f9; border: 1px solid #eee; margin-bottom: 10px; text-align: center; }
         #frg_app_container .legend-plus { color: red; font-weight: bold; font-size: 1.2rem; }
         #frg_app_container .legend-minus { color: blue; font-weight: bold; font-size: 1.2rem; }
         
-        #frg_app_container .notes-area { 
-            margin-top: 30px; border-top: 2px solid #eee; padding-top: 15px; 
-        }
+        #frg_app_container .notes-area { margin-top: 30px; border-top: 2px solid #eee; padding-top: 15px; }
         #frg_app_container .notes-area p { margin-bottom: 5px; font-size: 0.9rem; }
 
         .frg_print_only { display: none; }
@@ -178,20 +143,20 @@
     <div id="frg_step_1" class="frg_section no-print">
         <h2>1. בחר קטגוריות רלוונטיות:</h2>
         <div id="frg_list_cat" class="frg_grid_list">
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="גלאי עשן/ לחצן אזעקת אש" checked disabled><label class="lbl-toggle">גלאי עשן/ לחצן אזעקת אש</label></div>
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="מפוחים"><label class="lbl-toggle">מפוחים</label></div>
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="חדר מדרגות/פרוזדור מוגן"><label class="lbl-toggle">חדר מדרגות/פרוזדור מוגן</label></div>
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="שטחי דיירים בקומת משרדים"><label class="lbl-toggle">שטחי דיירים בקומת משרדים</label></div>
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="ספרינקלרים"><label class="lbl-toggle">ספרינקלרים</label></div>
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="קניון/מקום התקהלות"><label class="lbl-toggle">קניון/מקום התקהלות</label></div>
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="גלאי עצמאי"><label class="lbl-toggle">גלאי עצמאי</label></div>
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="בית מלון"><label class="lbl-toggle">בית מלון</label></div>
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="לוח חשמל החל מ-63 אמפר ומעלה"><label class="lbl-toggle">לוח חשמל החל מ-63 אמפר ומעלה</label></div>
-            <div class="frg_item"><input type="checkbox" class="cat-cb" value="מנדף"><label class="lbl-toggle">מנדף</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="גלאי עשן/ לחצן אזעקת אש" checked disabled><label onclick="window.frgClick(this)">גלאי עשן/ לחצן אזעקת אש</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="מפוחים"><label onclick="window.frgClick(this)">מפוחים</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="חדר מדרגות/פרוזדור מוגן"><label onclick="window.frgClick(this)">חדר מדרגות/פרוזדור מוגן</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="שטחי דיירים בקומת משרדים"><label onclick="window.frgClick(this)">שטחי דיירים בקומת משרדים</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="ספרינקלרים"><label onclick="window.frgClick(this)">ספרינקלרים</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="קניון/מקום התקהלות"><label onclick="window.frgClick(this)">קניון/מקום התקהלות</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="גלאי עצמאי"><label onclick="window.frgClick(this)">גלאי עצמאי</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="בית מלון"><label onclick="window.frgClick(this)">בית מלון</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="לוח חשמל החל מ-63 אמפר ומעלה"><label onclick="window.frgClick(this)">לוח חשמל החל מ-63 אמפר ומעלה</label></div>
+            <div class="frg_item"><input type="checkbox" class="cat-cb" value="מנדף"><label onclick="window.frgClick(this)">מנדף</label></div>
         </div>
         <div class="frg_controls">
-            <button id="frg_btn_next">הבא</button>
-            <button id="frg_btn_reset1" class="btn-red">נקה הכל</button>
+            <button onclick="window.frgNext()">הבא</button>
+            <button class="btn-red" onclick="window.frgReset()">נקה הכל</button>
         </div>
     </div>
 
@@ -199,43 +164,43 @@
     <div id="frg_step_2" class="frg_section no-print" style="display:none;">
         <h2>2. בחר תרחישי הפעלה:</h2>
         <div id="frg_list_scen" class="frg_grid_list">
-            <div class="frg_item scen-item frg_hidden" data-id="1"><input type="checkbox" class="scen-cb" value="1"><label class="lbl-toggle">תרחיש 1: גלאי עשן\לחצן אזעקת אש ראשון בגרעין הבניין</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="2"><input type="checkbox" class="scen-cb" value="2"><label class="lbl-toggle">תרחיש 2: גלאי עשן/לחצן אזעקת אש ראשון בגרעין הבניין לרבות מבואת מעלית/מעלית</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="3"><input type="checkbox" class="scen-cb" value="3"><label class="lbl-toggle">תרחיש 3: גלאי עשן/ לחצן אזעקת אש שני לאחר גלאי ראשון באותו אזור גילוי</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="4"><input type="checkbox" class="scen-cb" value="4"><label class="lbl-toggle">תרחיש 4: הפעלת גלאי בתעלת יניקה למערכת על לחץ (10)</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="5"><input type="checkbox" class="scen-cb" value="5"><label class="lbl-toggle">תרחיש 5: הפעלת גלאי בחדר מדרגות/פרוזדור מוגן (11)</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="6"><input type="checkbox" class="scen-cb" value="6"><label class="lbl-toggle">תרחיש 6: גלאי עשן/לחצן אזעקת אש ראשון בשטחי דיירים בקומת משרדים</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="7"><input type="checkbox" class="scen-cb" value="7"><label class="lbl-toggle">תרחיש 7: גלאי עשן/לחצן אזעקת אש שני בשטחי דיירים בקומת משרדים</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="8"><input type="checkbox" class="scen-cb" value="8"><label class="lbl-toggle">תרחיש 8: מפסק זרימה מע' מתזים</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="9"><input type="checkbox" class="scen-cb" value="9"><label class="lbl-toggle">תרחיש 9: גלאי בחדר טכני/מחסן או לחצן במקום ללא גלאי עשן</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="10"><input type="checkbox" class="scen-cb" value="10"><label class="lbl-toggle">תרחיש 10: מפסק זרימה בחניון</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="11"><input type="checkbox" class="scen-cb" value="11"><label class="lbl-toggle">תרחיש 11: לחצן אזעקת אש (כללי)</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="12"><input type="checkbox" class="scen-cb" value="12"><label class="lbl-toggle">תרחיש 12: גלאי עשן ראשון במעברים ומבואות בקניון\מקום התקהלות</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="13"><input type="checkbox" class="scen-cb" value="13"><label class="lbl-toggle">תרחיש 13: גלאי עשן שני במעברים ומבואות בקניון\מקום התקהלות</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="14"><input type="checkbox" class="scen-cb" value="14"><label class="lbl-toggle">תרחיש 14: גלאי עשן/לחצן אולם התקהלות</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="15"><input type="checkbox" class="scen-cb" value="15"><label class="lbl-toggle">תרחיש 15: גלאי עשן/לחצן שני אולם התקהלות</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="16"><input type="checkbox" class="scen-cb" value="16"><label class="lbl-toggle">תרחיש 16: הפעלת גלאי בתעלת אספקת אוויר צח</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="17"><input type="checkbox" class="scen-cb" value="17"><label class="lbl-toggle">תרחיש 17: גלאי עצמאי בדירת מגורים</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="18"><input type="checkbox" class="scen-cb" value="18"><label class="lbl-toggle">תרחיש 18: גלאי בחדר אירוח בבית מלון</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="19"><input type="checkbox" class="scen-cb" value="19"><label class="lbl-toggle">תרחיש 19: הפעלת גלאי בארון חשמל מעל 63A</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="20"><input type="checkbox" class="scen-cb" value="20"><label class="lbl-toggle">תרחיש 20: הפעלת גלאי שני בארון חשמל מעל 63A</label></div>
-            <div class="frg_item scen-item frg_hidden" data-id="21"><input type="checkbox" class="scen-cb" value="21"><label class="lbl-toggle">תרחיש 21: הפעלת כיבוי במנדף</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="1"><input type="checkbox" class="scen-cb" value="1"><label onclick="window.frgClick(this)">תרחיש 1: גלאי עשן\לחצן אזעקת אש ראשון בגרעין הבניין</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="2"><input type="checkbox" class="scen-cb" value="2"><label onclick="window.frgClick(this)">תרחיש 2: גלאי עשן/לחצן אזעקת אש ראשון בגרעין הבניין לרבות מבואת מעלית/מעלית</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="3"><input type="checkbox" class="scen-cb" value="3"><label onclick="window.frgClick(this)">תרחיש 3: גלאי עשן/ לחצן אזעקת אש שני לאחר גלאי ראשון באותו אזור גילוי</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="4"><input type="checkbox" class="scen-cb" value="4"><label onclick="window.frgClick(this)">תרחיש 4: הפעלת גלאי בתעלת יניקה למערכת על לחץ (10)</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="5"><input type="checkbox" class="scen-cb" value="5"><label onclick="window.frgClick(this)">תרחיש 5: הפעלת גלאי בחדר מדרגות/פרוזדור מוגן (11)</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="6"><input type="checkbox" class="scen-cb" value="6"><label onclick="window.frgClick(this)">תרחיש 6: גלאי עשן/לחצן אזעקת אש ראשון בשטחי דיירים בקומת משרדים</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="7"><input type="checkbox" class="scen-cb" value="7"><label onclick="window.frgClick(this)">תרחיש 7: גלאי עשן/לחצן אזעקת אש שני בשטחי דיירים בקומת משרדים</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="8"><input type="checkbox" class="scen-cb" value="8"><label onclick="window.frgClick(this)">תרחיש 8: מפסק זרימה מע' מתזים</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="9"><input type="checkbox" class="scen-cb" value="9"><label onclick="window.frgClick(this)">תרחיש 9: גלאי בחדר טכני/מחסן או לחצן במקום ללא גלאי עשן</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="10"><input type="checkbox" class="scen-cb" value="10"><label onclick="window.frgClick(this)">תרחיש 10: מפסק זרימה בחניון</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="11"><input type="checkbox" class="scen-cb" value="11"><label onclick="window.frgClick(this)">תרחיש 11: לחצן אזעקת אש (כללי)</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="12"><input type="checkbox" class="scen-cb" value="12"><label onclick="window.frgClick(this)">תרחיש 12: גלאי עשן ראשון במעברים ומבואות בקניון\מקום התקהלות</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="13"><input type="checkbox" class="scen-cb" value="13"><label onclick="window.frgClick(this)">תרחיש 13: גלאי עשן שני במעברים ומבואות בקניון\מקום התקהלות</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="14"><input type="checkbox" class="scen-cb" value="14"><label onclick="window.frgClick(this)">תרחיש 14: גלאי עשן/לחצן אולם התקהלות</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="15"><input type="checkbox" class="scen-cb" value="15"><label onclick="window.frgClick(this)">תרחיש 15: גלאי עשן/לחצן שני אולם התקהלות</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="16"><input type="checkbox" class="scen-cb" value="16"><label onclick="window.frgClick(this)">תרחיש 16: הפעלת גלאי בתעלת אספקת אוויר צח</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="17"><input type="checkbox" class="scen-cb" value="17"><label onclick="window.frgClick(this)">תרחיש 17: גלאי עצמאי בדירת מגורים</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="18"><input type="checkbox" class="scen-cb" value="18"><label onclick="window.frgClick(this)">תרחיש 18: גלאי בחדר אירוח בבית מלון</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="19"><input type="checkbox" class="scen-cb" value="19"><label onclick="window.frgClick(this)">תרחיש 19: הפעלת גלאי בארון חשמל מעל 63A</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="20"><input type="checkbox" class="scen-cb" value="20"><label onclick="window.frgClick(this)">תרחיש 20: הפעלת גלאי שני בארון חשמל מעל 63A</label></div>
+            <div class="frg_item scen-item frg_hidden" data-id="21"><input type="checkbox" class="scen-cb" value="21"><label onclick="window.frgClick(this)">תרחיש 21: הפעלת כיבוי במנדף</label></div>
         </div>
         <div class="frg_controls">
-            <button id="frg_btn_create">צור דוח</button>
-            <button id="frg_btn_reset2" class="btn-red">נקה הכל</button>
+            <button onclick="window.frgGenerate()">צור דוח</button>
+            <button class="btn-red" onclick="window.frgReset()">נקה הכל</button>
         </div>
     </div>
 
     <!-- Step 3: Result -->
     <div id="frg_step_3" style="display:none;">
         <div class="frg_controls no-print">
-            <button id="frg_btn_list" class="btn-blue">תצוגת רשימה</button>
-            <button id="frg_btn_table" class="btn-blue">תצוגת טבלה</button>
-            <button id="frg_btn_matrix" class="btn-blue">תצוגת מטריצה</button>
-            <button id="frg_btn_filter" class="btn-orange" style="display:none;">רק פעולות רלוונטיות</button>
-            <button id="frg_btn_restart" class="btn-red">התחל מחדש</button>
-            <button id="frg_btn_print" class="btn-print">הדפס דוח</button>
+            <button class="btn-blue" onclick="window.frgView('list')">תצוגת רשימה</button>
+            <button class="btn-blue" onclick="window.frgView('table')">תצוגת טבלה</button>
+            <button class="btn-blue" onclick="window.frgView('matrix')">תצוגת מטריצה</button>
+            <button id="frg_btn_filter" class="btn-orange" style="display:none;" onclick="window.frgToggleFilter(this)">רק פעולות רלוונטיות</button>
+            <button class="btn-red" onclick="window.frgReset()">התחל מחדש</button>
+            <button class="btn-print" onclick="window.print()">הדפס דוח</button>
         </div>
         
         <div id="frg_report_container">
@@ -249,8 +214,8 @@
 </div>
 
 <script>
-(function() {
-    var scenarios = [
+    // --- Data (Global) ---
+    var frg_dataScenarios = [
         {id:1,d:"גלאי עשן/לחצן אזעקת אש ראשון בגרעין הבניין"},
         {id:2,d:"גלאי עשן/לחצן אזעקת אש ראשון בגרעין הבניין לרבות מבואת מעלית/מעלית"},
         {id:3,d:"גלאי עשן/ לחצן אזעקת אש שני לאחר גלאי ראשון באותו אזור גילוי"},
@@ -273,7 +238,8 @@
         {id:20,d:"הפעלת גלאי שני בארון חשמל מעל 63A"},
         {id:21,d:"הפעלת כיבוי במנדף"}
     ];
-    var actions = [
+
+    var frg_dataActions = [
         {id:'A',t:"התרעה ביחידת בקרה"}, {id:'B',t:"חייגן אוטומטי (4)"}, {id:'C',t:"מסרון לבעלי תפקידים"},
         {id:'D',t:"מע' כריזה (3)"}, {id:'E',t:"צופר ונצנץ (3)"}, {id:'F',t:"שחרור עשן לובי"},
         {id:'G',t:"שחרור עשן מחסן"}, {id:'H',t:"שחרור עשן חלל הנדסי"}, {id:'I',t:"הפסקת מיזוג (3)"},
@@ -282,7 +248,8 @@
         {id:'P',t:"מעליות ודרגנועים (25)"}, {id:'Q',t:"שחרור דלתות מבוקרות"}, {id:'R',t:"ניתוק חשמל"},
         {id:'S',t:"כיבוי לוחות חשמל (9)"}, {id:'T',t:"ניתוק גפ\"מ (12)"}
     ];
-    var matrix = {
+
+    var frg_dataMatrix = {
         1:{A:'+',B:'+',C:'+',D:'+(1)',E:'+(1)',F:'+',I:'+',J:'+',L:'+',O:'+'},
         2:{A:'+',B:'+',C:'+',P:'+(21)'},
         3:{A:'+',B:'+',C:'+',D:'+',E:'+',F:'+',I:'+',J:'+',L:'+',O:'+',P:'+',Q:'+'},
@@ -305,101 +272,77 @@
         20:{A:'+',B:'+',C:'+',D:'+',E:'+(7)',R:'+(8)',S:'+(9)'},
         21:{A:'+',B:'+',C:'+',D:'+',T:'+(12)'}
     };
-    var mapping = {
-        "גלאי עשן/ לחצן אזעקת אש": [1,2,3,9,11,13], "מפוחים": [4,16], "חדר מדרגות/פרוזדור מוגן": [5],
-        "שטחי דיירים בקומת משרדים": [6,7], "ספרינקלרים": [8,10], "קניון/מקום התקהלות": [12,13,14,15],
-        "גלאי עצמאי": [17], "בית מלון": [18], "לוח חשמל החל מ-63 אמפר ומעלה": [19,20], "מנדף": [21]
-    };
-    var notes = {
-        "1": "בשימושים בהם הוראת נציב 550 מאפשרת הפעלת מנגנון אימות אזעקה...",
-        "2": "משטר הפעלות לשליטה בעשן באטריום...",
-        "3": "לפחות בקומת האירוע וליד יחידת הבקרה...",
-        "4": "התרעת האש תהיה בהתאם לתקן 1220 חלק 3...",
-        "6": "תריסים/וילונות יסגרו בקומת האירוע...",
-        "7": "הפעלת נורית מעל לוח חשמל מזעיק...",
-        "8": "ניתוק זרם החשמל של הלוח המזעיק...",
-        "9": "הפעלת מערכת כיבוי אש בגז...",
-        "11": "הפעלת גלאי עשן בחדר מדרגות מוגן...",
-        "12": "ניתוק מקורות אנרגיה למערכת הכיבוי...",
-        "13": "הפסקת פעולת יח' טיפול באוויר...",
-        "15": "בחנויות/מחסנים/חדרים טכניים - כריזת חירום...",
-        "16": "אם הופעלו באולם גלאי עשן או לחצן...",
-        "17": "אם הופעלה הודעת פינוי אוטומטית לאולם...",
-        "19": "הפעלת צופר בחדר האירוח...",
-        "20": "הפסקת אוויר צח בפרוזדור צמוד...",
-        "21": "ביטול אפשרות הגעת המעלית לקומה...",
-        "22": "הפעלת מפתח כבאים במפלס הכניסה...",
-        "25": "משטר ההפעלות של מעליות פינוי..."
+
+    var frg_dataMapping = {
+        "גלאי עשן/ לחצן אזעקת אש": [1,2,3,9,11,13], 
+        "מפוחים": [4,16], 
+        "חדר מדרגות/פרוזדור מוגן": [5],
+        "שטחי דיירים בקומת משרדים": [6,7], 
+        "ספרינקלרים": [8,10], 
+        "קניון/מקום התקהלות": [12,13,14,15], 
+        "גלאי עצמאי": [17], 
+        "בית מלון": [18], 
+        "לוח חשמל החל מ-63 אמפר ומעלה": [19,20], 
+        "מנדף": [21]
     };
 
-    var selIds = [];
-    var filter = false;
+    var frg_dataNotes = {
+        "1": "בשימושים בהם הוראת נציב 550 מאפשרת הפעלת מנגנון אימות אזעקה, הפעלת צופרי אזעקה ונצנצים תיעשה 180 שניות לאחר הפעלת גלאי עשן ראשון, אם בוצע אישור אירוע (ACK) אימות אזעקה בתוך 15 שניות. אם לא בוצע אישור אירוע (ACK) אימות אזעקה בתוך 15 שניות מהפעלת גלאי ראשון, הפעלת אזעקה ונצנצים תתבצע מידית. בקניונים ומקומות התקהלות בהם קיים חדר בקרה המאויש 24 שעות ביממה, וקיים נוהל חירום לאימות אזעקה ואנשי הצוות מיומנים בהפעלת מערכות בטיחות האש, ניתן שגלאי ראשון יפעיל צופר ונצנץ בחדר בקרה בלבד, ואם לא בוצע אימות התראה בתוך 15 שניות, יופעלו באופן אוטומטי צופרים ונצנצים בשטחים הציבוריים. בשימושים אחרים בהם הוראת נציב 550 אינה מאפשרת הפעלת מנגנון אימות אזעקה, יופעלו צופרי אזעקה ונצנצים באופן מידי לאחר הפעלת גלאי ראשון.",
+        "2": "משטר הפעלות לשליטה בעשן באטריום, חללים חוצים וחניונים בהתאם לתכנון הקיים בבניין יתבצע בכפוף לניתוח הנדסי (CFD) אם הוכן, או הנחיות המתכנן - בהעדר ניתוח הנדסי. במחסנים וחדרים טכניים - הפעלת מפוח שחרור עשן, פתיחת מדף עשן וסגירת מדף אש (אם קיים). בחנויות בקניון - אם מותקן מפוח לשחרור עשן, המפוח יפסיק את עבודתו אם מופעל מפוח לשחרור עשן ממעבר ציבורי סמוך.",
+        "3": "לפחות בקומת האירוע וליד יחידת הבקרה. בקומות נוספות - ע\"פ שיקול דעת המתכנן בבניינים רבי קומות.",
+        "4": "התרעת האש תהיה בהתאם לתקן 1220 חלק 3 \"מערכות גילוי אש: הוראות התקנה ודרישות\".",
+        "6": "תריסים\\וילונות יסגרו בקומת האירוע ובחללים משותפים המושפעים מתנועת העשן. משני צדדיו של הווילון\\תריס תותקן מערכת התראה חזותית וקולית (נצנץ וצופר) שיופעלו 15 שניות לפני ירידת הווילון\\תריס.",
+        "7": "הפעלת נורית מעל לוח חשמל מזעיק, הפעלת נצנץ (אם קיים) ושלט מואר - \"כיבוי הופעל\" בכניסה לחדר חשמל\\תקשורת לאחר הפעלת כיבוי אוטומטי או ידני באמצעות לחצן כיבוי.",
+        "8": "ניתוק זרם החשמל של הלוח המזעיק בלוח המזין, מלבד לוח גנרטור חירום, לוחות מפוחי עשן שחרור עשן ומפוחי על לחץ ולוח משאבות כיבוי אש.",
+        "9": "הפעלת מערכת כיבוי אש בגז כיבוי בארון חשמל מעל 100 אמפר או בחדר חשמל\\תקשורת בו הופעלו 2 גלאי עשן וקיימת מערכת כבוי אוטומטית. בחדר חשמל\\תקשורת בו הופעלה מערכת כיבוי אוטומטית בגז, יופעלו מפוחים לשחרור עשן באופן ידני ובהתאם לשיקול דעת הגורם המבצעי באירוע.",
+        "11": "הפעלת גלאי עשן בחדר מדרגות מוגן יגרום לפתיחת מדפי שחרור עשן המותקנים בחלק העליון של חדר המדרגות בו התגלה האירוע.",
+        "12": "ניתוק מקורות אנרגיה למערכת הכיבוי במערכת בישול מסחרית בעת הפעלת מערכת כיבוי.",
+        "13": "הפסקת פעולת יח' טיפול באוויר (יט\"א) קומתיים בזמן גילוי גלאי המותקן בתוך תעלת יניקת אוויר מהחוץ והפעלת גילוי אש באזור אש בקומה האחרונה.",
+        "15": "בחנויות/מחסנים/חדרים טכניים - כריזת חירום ידנית או אוטומטית בהתאם לתכנון קיים ולהפעלת צופרים/נצנצים מקומית בלבד - במקום הפעלת גלאי\\לחצן אזעקת אש. בחניונים – בכל קומות החניון.",
+        "16": "אם הופעלו באולם גלאי עשן או לחצן ראשון, יופעלו באולם באופן מידי נצנצים וכריזת חירום ותאורה תידלק יופסקו הפרעות אחרות כגון: מוזיקה פירוטכניקה משחקי אורות וכד'.",
+        "17": "אם הופעלה הודעת פינוי אוטומטית לאולם באמצעות מערכת כריזת חרום, תידלק תאורת חרום באולם ובמבואה\\שטחים ציבוריים צמודים, ותופסק הפעילות באולמות אלו.",
+        "19": "הפעלת צופר בחדר האירוח בו התריע גלאי ובחדרים צמודים.",
+        "20": "הפסקת אוויר צח בפרוזדור צמוד לחדר אירוח בו התריע גלאי.",
+        "21": "ביטול אפשרות הגעת המעלית לקומה המזעיקה והפנייתה למפלס הכניסה (או לקומה חלופית אם מפלס הכניסה הוא המקור).",
+        "22": "הפעלת מפתח כבאים במפלס הכניסה לבניין, תגרום למעלית החירום לרדת למפלס קומת הכניסה ודלת מעלית החירום תעבור למצב פתוח.",
+        "25": "משטר ההפעלות של מעליות פינוי יהיה בהתאם לניתוח ההנדסי כחלק בלתי נפרד ממנו."
+    };
 
-    // Helper functions
-    function getEl(id) { return document.getElementById(id); }
-    function getS(id) { for(var i=0; i<scenarios.length; i++) if(scenarios[i].id == id) return scenarios[i]; return null; }
-    function getA(id) { for(var i=0; i<actions.length; i++) if(actions[i].id == id) return actions[i]; return null; }
-    function fmt(t, set) {
-        return t.replace(/\((\d+)\)/g, function(m, n) { 
-            if(notes[n]){ set[n]=true; return '['+n+']'; } 
-            return m; 
-        });
-    }
+    var frg_selIds = [];
+    var frg_filterActive = false;
 
-    // --- Main Logic ---
+    // --- Core Functions ---
 
-    // Ensure elements exist and bind events
-    function bindEvents() {
-        var btnNext = getEl('frg_btn_next');
-        if (!btnNext) return; // Not ready yet
+    window.frgClick = function(el) {
+        var cb = el.previousElementSibling;
+        if(cb && !cb.disabled) cb.checked = !cb.checked;
+    };
 
-        // Clear old listeners by cloning or just reassigning onclick
-        btnNext.onclick = goNext;
-        getEl('frg_btn_reset1').onclick = resetAll;
-        getEl('frg_btn_create').onclick = generate;
-        getEl('frg_btn_reset2').onclick = resetAll;
-        getEl('frg_btn_list').onclick = function(){ setView('list'); };
-        getEl('frg_btn_table').onclick = function(){ setView('table'); };
-        getEl('frg_btn_matrix').onclick = function(){ setView('matrix'); };
-        getEl('frg_btn_filter').onclick = toggleFilter;
-        getEl('frg_btn_restart').onclick = resetAll;
-        getEl('frg_btn_print').onclick = function(){ window.print(); };
-
-        // Toggle checkboxes via labels
-        var labels = document.querySelectorAll('.lbl-toggle');
-        for(var i=0; i<labels.length; i++) {
-            labels[i].onclick = function() {
-                var cb = this.previousElementSibling;
-                if(cb && !cb.disabled) cb.checked = !cb.checked;
-            }
-        }
-    }
-
-    function goNext() {
-        var name = getEl('frg_val_name').value;
-        if (!name) {
-            getEl('frg_err_name').style.display = 'block';
+    window.frgNext = function() {
+        var nm = document.getElementById('frg_val_name').value;
+        if(!nm) {
+            document.getElementById('frg_err_name').style.display = 'block';
             return;
         }
-        getEl('frg_err_name').style.display = 'none';
+        document.getElementById('frg_err_name').style.display = 'none';
 
-        var cats = [];
         var inps = document.querySelectorAll('.cat-cb');
+        var cats = [];
         for(var i=0; i<inps.length; i++) {
             if(inps[i].checked) cats.push(inps[i].value);
         }
 
         var rel = {};
         for(var j=0; j<cats.length; j++) {
-            var ids = mapping[cats[j]];
-            if(ids) for(var k=0; k<ids.length; k++) rel[ids[k]] = true;
+            var cIds = frg_dataMapping[cats[j]];
+            if(cIds) { for(var k=0; k<cIds.length; k++) rel[cIds[k]] = true; }
         }
 
         var cnt = 0;
-        var scenDivs = document.querySelectorAll('.scen-item');
-        for(var m=0; m<scenDivs.length; m++) {
-            var div = scenDivs[m];
-            var inp = div.querySelector('input');
+        var divs = document.querySelectorAll('.scen-item');
+        for(var m=0; m<divs.length; m++) {
+            var div = divs[m];
+            var inp = div.getElementsByTagName('input')[0];
             var id = parseInt(inp.value);
             if(rel[id]) {
                 div.style.display = 'flex';
@@ -411,146 +354,159 @@
                 inp.checked = false;
             }
         }
+        
+        if(cnt===0) { alert('לא נמצאו תרחישים רלוונטיים'); return; }
 
-        if(cnt === 0) { alert('לא נמצאו תרחישים'); return; }
+        document.getElementById('frg_step_1').style.display = 'none';
+        document.getElementById('frg_step_2').style.display = 'block';
+    };
 
-        getEl('frg_step_1').style.display = 'none';
-        getEl('frg_step_2').style.display = 'block';
-    }
-
-    function generate() {
-        selIds = [];
-        var inps = document.querySelectorAll('.scen-cb');
-        for(var i=0; i<inps.length; i++) {
-            if(inps[i].checked && !inps[i].parentElement.classList.contains('frg_hidden')) {
-                selIds.push(parseInt(inps[i].value));
-            }
-        }
-        if(selIds.length === 0) { alert('בחר תרחיש'); return; }
-
-        getEl('frg_print_title').innerText = "שם הפרויקט: " + getEl('frg_val_name').value;
-        getEl('frg_step_2').style.display = 'none';
-        getEl('frg_step_3').style.display = 'block';
-        render();
-        setView('list');
-    }
-
-    function resetAll() {
-        getEl('frg_val_name').value = '';
+    window.frgReset = function() {
+        document.getElementById('frg_val_name').value = '';
         var chks = document.querySelectorAll('input[type="checkbox"]');
         for(var i=0; i<chks.length; i++) {
             if(!chks[i].disabled) chks[i].checked = false;
         }
-        getEl('frg_step_3').style.display = 'none';
-        getEl('frg_step_2').style.display = 'none';
-        getEl('frg_step_1').style.display = 'block';
+        document.getElementById('frg_step_3').style.display = 'none';
+        document.getElementById('frg_step_2').style.display = 'none';
+        document.getElementById('frg_step_1').style.display = 'block';
         window.scrollTo(0,0);
-    }
+    };
 
-    function setView(v) {
-        var views = document.querySelectorAll('.report-view');
-        for(var i=0; i<views.length; i++) views[i].classList.remove('active');
+    window.frgGenerate = function() {
+        frg_selIds = [];
+        var cbs = document.querySelectorAll('.scen-cb:checked');
+        for(var i=0; i<cbs.length; i++) {
+            if (!cbs[i].parentElement.classList.contains('frg_hidden')) {
+                frg_selIds.push(parseInt(cbs[i].value));
+            }
+        }
+        if (frg_selIds.length === 0) { alert('אנא בחר לפחות תרחיש אחד'); return; }
+
+        document.getElementById('frg_print_title').innerText = "שם הפרויקט: " + document.getElementById('frg_val_name').value;
+        document.getElementById('frg_step_2').style.display = 'none';
+        document.getElementById('frg_step_3').style.display = 'block';
         
-        if(v==='list') getEl('frg_view_l').classList.add('active');
-        else if(v==='table') getEl('frg_view_t').classList.add('active');
-        else getEl('frg_view_m').classList.add('active');
+        window.frgRender();
+        window.frgView('list');
+    };
 
-        getEl('frg_btn_filter').style.display = (v === 'matrix') ? 'inline-block' : 'none';
-        if(v === 'matrix') document.body.className = 'frg_matrix_print';
-        else document.body.className = '';
-    }
+    window.frgView = function(v) {
+        var vs = document.querySelectorAll('.report-view');
+        for(var i=0; i<vs.length; i++) vs[i].classList.remove('active');
+        
+        var target = (v==='list') ? 'frg_view_l' : (v==='table') ? 'frg_view_t' : 'frg_view_m';
+        document.getElementById(target).classList.add('active');
+        
+        document.getElementById('frg_btn_filter').style.display = (v === 'matrix') ? 'inline-block' : 'none';
+        if(v === 'matrix') document.body.classList.add('frg_matrix_print');
+        else document.body.classList.remove('frg_matrix_print');
+    };
 
-    function toggleFilter() {
-        filter = !filter;
-        getEl('frg_btn_filter').innerText = filter ? "הצג הכל" : "רק פעולות רלוונטיות";
-        render();
-    }
+    window.frgToggleFilter = function(btn) {
+        var isFilt = btn.getAttribute('data-active') === 'true';
+        isFilt = !isFilt;
+        btn.setAttribute('data-active', isFilt);
+        btn.innerText = isFilt ? "הצג הכל" : "רק פעולות רלוונטיות";
+        frg_filterActive = isFilt;
+        window.frgRender();
+    };
 
-    function render() {
+    window.frgRender = function() {
         var used = {"1": true};
-        selIds.sort(function(a,b){return a-b});
+        frg_selIds.sort(function(a,b){return a-b});
+
+        function fmt(t, set) {
+            return t.replace(/\((\d+)\)/g, function(m, n) { 
+                if(frg_dataNotes[n]){ set[n]=true; return '['+n+']'; } 
+                return m; 
+            });
+        }
+
+        // Helper functions
+        function getS(id){for(var i=0;i<frg_dataScenarios.length;i++)if(frg_dataScenarios[i].id==id)return frg_dataScenarios[i];return null;}
+        function getA(id){for(var i=0;i<frg_dataActions.length;i++)if(frg_dataActions[i].id==id)return frg_dataActions[i];return null;}
 
         // List
         var hL = '';
-        for(var i=0; i<selIds.length; i++) {
-            var sid = selIds[i];
+        for(var i=0; i<frg_selIds.length; i++) {
+            var sid = frg_selIds[i];
             var s = getS(sid);
             hL += '<h3>תרחיש '+sid+': '+fmt(s.d, used)+'</h3><ul>';
-            var r = matrix[sid] || {};
+            var r = frg_dataMatrix[sid] || {};
             for(var aid in r) {
-                var act = getAct(aid);
+                var act = getA(aid);
                 hL += '<li>'+act.t+' ('+fmt(r[aid], used)+')</li>';
             }
             hL += '</ul>';
         }
-        getEl('frg_view_l').innerHTML = hL;
+        document.getElementById('frg_view_l').innerHTML = hL;
 
         // Table
         var hT = '<table><tr><th>תרחיש</th><th>פעולות מופעלות</th></tr>';
-        for(var j=0; j<selIds.length; j++) {
-            var sid = selIds[j];
-            var s = getS(sid);
+        for(var j=0; j<frg_selIds.length; j++) {
+            var sid2 = frg_selIds[j];
+            var s2 = getS(sid2);
             var acts = '<ul>';
-            var r = matrix[sid] || {};
-            for(var aid in r) {
-                var act = getAct(aid);
-                acts += '<li>'+act.t+' ('+fmt(r[aid], used)+')</li>';
+            var r2 = frg_dataMatrix[sid2] || {};
+            for(var aid2 in r2) {
+                var act2 = getA(aid2);
+                acts += '<li>'+act2.t+' ('+fmt(r2[aid2], used)+')</li>';
             }
-            hT += '<tr><td>'+sid+': '+fmt(s.d, used)+'</td><td>'+acts+'</ul></td></tr>';
+            hT += '<tr><td>'+sid2+': '+fmt(s2.d, used)+'</td><td>'+acts+'</ul></td></tr>';
         }
-        getEl('frg_view_t').innerHTML = hT + '</table>';
+        document.getElementById('frg_view_t').innerHTML = hT + '</table>';
 
         // Matrix
         var hM = '<div class="legend">מקרא: <span class="legend-plus">+</span> פעולה <span class="legend-minus">-</span> ללא שינוי</div><table><tr><th>תרחיש / פעולה</th>';
         var visible = [];
-        for(var k=0; k<actions.length; k++){
-            if(!filter) visible.push(actions[k]);
+        for(var k=0; k<frg_dataActions.length; k++){
+            if(!frg_filterActive) visible.push(frg_dataActions[k]);
             else {
                 var hit = false;
-                for(var m=0; m<selIds.length; m++){ if(matrix[selIds[m]] && matrix[selIds[m]][actions[k].id]) {hit=true; break;} }
-                if(hit) visible.push(actions[k]);
+                for(var m=0; m<frg_selIds.length; m++){ if(frg_dataMatrix[frg_selIds[m]] && frg_dataMatrix[frg_selIds[m]][frg_dataActions[k].id]) {hit=true; break;} }
+                if(hit) visible.push(frg_dataActions[k]);
             }
         }
         for(var n=0; n<visible.length; n++) hM += '<th class="action-header">'+visible[n].t.replace(/\(\d+\)/g,'')+' ('+visible[n].id+')</th>';
         hM += '</tr>';
 
-        for(var p=0; p<selIds.length; p++){
-            var sid = selIds[p];
-            var s = getS(sid);
-            hM += '<tr><td style="font-size:0.8rem; width:200px;">'+sid+': '+fmt(s.d, used)+'</td>';
+        for(var p=0; p<frg_selIds.length; p++){
+            var sid3 = frg_selIds[p];
+            var s3 = getS(sid3);
+            hM += '<tr><td style="font-size:0.8rem; width:200px;">'+sid3+': '+fmt(s3.d, used)+'</td>';
             for(var q=0; q<visible.length; q++){
-                var aid = visible[q].id;
-                var val = matrix[sid] && matrix[sid][aid] ? matrix[sid][aid] : '-';
-                var cls = val !== '-' ? 'cell-plus' : 'cell-minus';
-                var sym = (val === 'בסיס הגלאי') ? 'בסיס' : (val !== '-' ? '+' : '-');
+                var aid3 = visible[q].id;
+                var val = frg_dataMatrix[sid3] && frg_dataMatrix[sid3][visible[q].id] ? frg_dataMatrix[sid3][visible[q].id] : '-';
+                var isP = (val !== '-');
+                var cls = isP ? 'cell-plus' : 'cell-minus';
+                var sym = (val === 'בסיס הגלאי') ? 'בסיס' : (isP ? '+' : '-');
                 var note = fmt(val, used).replace('+','').replace('בסיס הגלאי','');
                 hM += '<td class="matrix-cell '+cls+'">'+sym+'<span class="matrix-note">'+note+'</span></td>';
             }
             hM += '</tr>';
         }
-        getEl('frg_view_m').innerHTML = hM + '</table>';
+        document.getElementById('frg_view_m').innerHTML = hM + '</table>';
 
         // Notes
         var nArr = [];
-        for(var k in used) nArr.push(parseInt(k));
+        for(var kId in used){ if(used.hasOwnProperty(kId)) nArr.push(parseInt(kId)); }
         nArr.sort(function(a,b){return a-b});
         var hN = '<h4>הערות והבהרות:</h4>';
         for(var z=0; z<nArr.length; z++) {
             var nStr = nArr[z].toString();
-            if(notes[nStr]) hN += '<p><strong>['+nStr+']</strong> '+notes[nStr]+'</p>';
+            if(frg_dataNotes[nStr]) hN += '<p><strong>['+nStr+']</strong> '+frg_dataNotes[nStr]+'</p>';
         }
-        getEl('frg_notes_target').innerHTML = hN;
+        document.getElementById('frg_notes_target').innerHTML = hN;
     }
 
-    // Try binding until successful
-    var interval = setInterval(function() {
-        if(document.getElementById('frg_btn_next')) {
-            bindEvents();
-            clearInterval(interval);
-        }
-    }, 500);
-
-})();
+    // Input Handler
+    var nameInp = document.getElementById('frg_val_name');
+    if(nameInp) {
+        nameInp.oninput = function() { 
+            if(this.value) document.getElementById('frg_err_name').style.display='none'; 
+        };
+    }
 </script>
 
 </body>
